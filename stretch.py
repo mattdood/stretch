@@ -8,13 +8,14 @@ break_count = 0 # total
 break_length = 20 # seconds
 
 # progress bar for break
-def cli_progress(break_length, bar_length=20):
-    for i in range(0, break_length):
+def cli_progress(break_length, bar_length=40):
+    for i in range(break_length):
         percent = float(i) / break_length
         hashes = '#' * int(round(percent * bar_length))
         spaces = ' ' * (bar_length - len(hashes))
-        sys.stdout.write('\rPercent: [{0}] {1}% - Break length: {2} seconds.'.format(hashes + spaces, int(round(percent * 100)), break_length))
+        sys.stdout.write('\rPercent: [{0}] {1}% - Break timer: {2} seconds.'.format(hashes + spaces, int(round(percent * 100)), i))
         sys.stdout.flush()
+        time.sleep(1)
 
 # clear terminal after break
 def clear():
@@ -28,11 +29,10 @@ def beep():
     print('\a')
 
 while (break_count < total_breaks):
-    time.sleep(900) # 15 min
+    time.sleep(10) # 15 min
     
     # notification
-    for i in range(3):
-        beep()
+    beep()
 
     break_time = datetime.datetime.now().strftime('%a, %b %d %Y  %I:%M:%S %p')
     print("""
@@ -52,9 +52,7 @@ while (break_count < total_breaks):
     """ % (break_time, break_count))
 
     # break progress bar
-    for iteration in range(break_length):
-        time.sleep(1)
-        cli_progress(iteration)
+    cli_progress(break_length)
 
     # clear terminal
     clear()
