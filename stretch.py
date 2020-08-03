@@ -30,7 +30,7 @@ def beep():
     print('\a')
 
 while (break_count < total_breaks):
-    time.sleep(900) # 15 min
+    time.sleep(1800) # 30 min
     
     # notification
     beep()
