@@ -16,6 +16,7 @@ def cli_progress(break_length, bar_length=40):
         sys.stdout.write('\rPercent: [{0}] {1}% - Break timer: {2} seconds.'.format(hashes + spaces, int(round(percent * 100)), i))
         sys.stdout.flush()
         time.sleep(1)
+    return beep()
 
 # clear terminal after break
 def clear():
@@ -29,7 +30,7 @@ def beep():
     print('\a')
 
 while (break_count < total_breaks):
-    time.sleep(10) # 15 min
+    time.sleep(900) # 15 min
     
     # notification
     beep()
